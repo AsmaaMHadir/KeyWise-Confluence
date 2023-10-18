@@ -1,8 +1,6 @@
-# Forge Hello World
+# KeyWise
 
-This project contains a Forge app written in Javascript that displays `Hello World!` in a Confluence content action. 
-
-See [developer.atlassian.com/platform/forge/](https://developer.atlassian.com/platform/forge) for documentation and tutorials explaining Forge.
+This project contains a Forge app written in Javascript that provides the user with an AI-powered keyword mapping directory. 
 
 ## Requirements
 
