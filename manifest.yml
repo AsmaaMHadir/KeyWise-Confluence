@@ -1,0 +1,18 @@
+modules:
+  confluence:contentAction:
+    - key: keywise-hello-world
+      function: main
+      title: KeyWise
+  function:
+    - key: main
+      handler: index.run
+app:
+  id: ari:cloud:ecosystem::app/f5a19b88-5338-454d-9094-e7b0590fcfd4
+
+permissions:
+  scopes:
+    - read:space:confluence
+    - read:confluence-content.summary
+    - read:content-details:confluence
+    - read:page:confluence
+    - write:custom-content:confluence
