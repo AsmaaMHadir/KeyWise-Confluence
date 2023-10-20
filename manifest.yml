@@ -1,11 +1,15 @@
 modules:
-  confluence:contentAction:
-    - key: keywise-hello-world
-      function: main
-      title: KeyWise
-  function:
-    - key: main
-      handler: index.run
+  confluence:customContent:
+    - key: keyword
+      title: Keywords
+      description: Custom content for keywords
+      bodyType: raw
+      supportedContainerTypes:
+        - space
+      function: getCustomContent
+
+
+  
 app:
   id: ari:cloud:ecosystem::app/f5a19b88-5338-454d-9094-e7b0590fcfd4
 
