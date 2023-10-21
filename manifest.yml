@@ -3,18 +3,26 @@ modules:
     - key: keyword
       title: Keywords
       description: Custom content for keywords
-      bodyType: raw
+      bodyType: storage
       supportedContainerTypes:
         - space
-      function: getCustomContent
+      function: main
+  confluence:spacePage:
+    - key: keywise-test-space-page-hello-world
+      function: main
+      title: KeyWise
+      route: keywise-keywords
+  function:
+    - key: main
+      handler: index.run
 
 
-  
 app:
   id: ari:cloud:ecosystem::app/f5a19b88-5338-454d-9094-e7b0590fcfd4
 
 permissions:
   scopes:
+    - write:confluence-content
     - read:space:confluence
     - read:confluence-content.summary
     - read:content-details:confluence

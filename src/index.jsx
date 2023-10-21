@@ -1,15 +1,24 @@
-import ForgeUI, { render, Text, ContentAction, ModalDialog, useState, CustomContent } from '@forge/ui';
+import ForgeUI, { render, SpaceCustomContentListView, SpacePage, useState, CustomContent, useProductContext } from '@forge/ui';
 import { createPineconeIndex } from "./createPineconeIndex.js";
 import { updatePinecone } from "./updatePinecone.js";
-
-import {getSpaceIdByKey, createKeyWordCustomContent} from "./CustomKeywordContent.js"
-
+import {extractAppId,getSpaceIdByKey} from "./helpers.js";
+import { createCustomContent} from "./keywordCustomContent.js";
+import { keywordView } from './keywordView.js';
 require('dotenv').config();
 
 
 
 
 const App = () => {
+
+
+  const context = useProductContext();
+  const {spaceKey, localId, environmentType} = useProductContext();
+  const appID = extractAppId(localId); // extract app ID
+  const type = `forge:${appID}:${environmentType}:KeyWord`;
+
+  useState(async () => await createCustomContent(type, parseInt(getSpaceIdByKey(spaceKey), 10), "1", "hello"));
+  // Create a the keyword type:
 
   /*
   // PINECONE
@@ -20,34 +29,28 @@ const App = () => {
   });
   */
 
-  // get space key, app ID, environment type from product context (space)
-  //const {spaceKey, localId, environmentType} = useProductContext();
-  //const type = `forge:${extractAppId(localId)}:${environmentType}:KeyWord`; // custom content type
-  //const pageId = "753665";
-
  
 // modify below
-  return (
-    <SpaceCustomContentListView type={type} spaceKey={spaceKey} />
-  );
+return (
+  <SpaceCustomContentListView
+    type={type}  // Replace with your custom content type
+    spaceKey={spaceKey}      // Replace with your space key
+  >
+    {(customContent, context) => (
+      <CustomContent key={customContent.id}>
+        {keywordView(context)}
+      </CustomContent>
+    )}
+  </SpaceCustomContentListView>
+);
 };
 
 export const run = render(
-  <ContentAction>
+  <SpacePage>
     <App/>
-  </ContentAction>
+  </SpacePage>
 );
 
 
 
-const App = () => {
-    return (
-        <Text>This is a place where the custom content will be rendered!</Text>
-    );
-};
 
-export const run = render(
-    <CustomContent>
-        <App/>
-    </CustomContent>
-);
