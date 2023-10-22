@@ -1,12 +1,12 @@
 modules:
-  confluence:customContent:
-    - key: keyword
-      title: Keywords
-      description: Custom content for keywords
-      bodyType: storage
-      supportedContainerTypes:
-        - space
-      function: main
+ # confluence:customContent:
+ #   - key: keyword
+  #    title: Keywords
+   #   description: Custom content for keywords
+    #  bodyType: storage
+     # supportedContainerTypes:
+     #   - space
+     # function: main
   confluence:spacePage:
     - key: keywise-test-space-page-hello-world
       function: main

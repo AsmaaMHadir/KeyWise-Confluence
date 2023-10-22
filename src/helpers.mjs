@@ -14,7 +14,7 @@ export function extractAppId(inputString) {
 export const getSpaceIdByKey = async (spaceKey) => {
 
     
-    const response = await api.asApp().requestConfluence(route`/wiki/api/v2/spaces?${spaceKey}`, {
+    const response = await api.asUser().requestConfluence(route`/wiki/api/v2/spaces?key=${spaceKey}`, {
         headers: {
         'Accept': 'application/json'
         }
@@ -34,4 +34,25 @@ export const getSpaceIdByKey = async (spaceKey) => {
     // If no matching space is found, you can return null or handle the error accordingly
     console.log("space key not found")
     return null; 
+}
+
+export function extractPageIds(jsonResponse) {
+      const parsedResponse = JSON.parse(jsonResponse); // Parse the JSON response
+    
+      if (parsedResponse.results && Array.isArray(parsedResponse.results)) {
+        // Check if the "results" property is an array
+        const pageIds = parsedResponse.results.map(page => page.id);
+        return pageIds;
+      } else {
+        // Handle the case where the JSON structure is different
+        return [];
+      }
     }
+
+
+const ID = await getSpaceIdByKey('CS');
+console.log(ID);
+    
+    
+    
+    

@@ -13,8 +13,12 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "dependencies": {
+    "@azure/identity": "^3.3.2",
+    "@azure/storage-blob": "^12.16.0",
     "@forge/api": "^2.19.3",
     "@forge/ui": "1.9.8",
-    "dotenv": "^16.3.1"
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "uuid": "^9.0.1"
   }
 }
