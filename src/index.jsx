@@ -205,8 +205,6 @@ const fetchPageContents_toBlobStorage = async (spaceID) => {
 
 
 
-
-
 function extractAppId(inputString) {
   const regex = /--extension-(.*?)--static/;
   const match = regex.exec(inputString);

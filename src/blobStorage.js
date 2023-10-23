@@ -3,6 +3,8 @@ import { BlobServiceClient } from "@azure/storage-blob";
 import { v1 as uuidv1 } from 'uuid';
 import { DefaultAzureCredential } from '@azure/identity';
 
+
+
 // works
 export const createBlobStorage = async () => {
     ```
@@ -11,18 +13,12 @@ export const createBlobStorage = async () => {
     Input: None
     Output: Blob service client object , container client object
     ```
-  
-  
-    const AZURE_STORAGE_CONNECTION_STRING = 
-    process.env.AZURE_STORAGE_CONNECTION_STRING;
-  
-  if (!AZURE_STORAGE_CONNECTION_STRING) {
-    throw Error('Azure Storage Connection string not found');
-  }
+  const storageAccountName = 'keywisestorage';
+  const sasToken = process.env.AZURE_SAS_TOKEN;
   
   // Create the BlobServiceClient object with connection string
-  const blobServiceClient = BlobServiceClient.fromConnectionString(
-    AZURE_STORAGE_CONNECTION_STRING
+  const blobServiceClient = new BlobServiceClient(
+    `https://${storageAccountName}.blob.core.windows.net/?${sasToken}`
   );
   
   // Create a unique name for the container
@@ -34,7 +30,9 @@ export const createBlobStorage = async () => {
   // Get a reference to a container
   const containerClient = blobServiceClient.getContainerClient(containerName);
   // Create the container
-  const createContainerResponse = await containerClient.create();
+  const createContainerResponse = await containerClient.createIfNotExists({
+    access: 'container',
+  });
   console.log(
   `Container was created successfully.\n\trequestId:${createContainerResponse.requestId}\n\tURL: ${containerClient.url}`
   );
@@ -44,18 +42,18 @@ export const createBlobStorage = async () => {
   
   }
   
-// works
-
-// containerClient: ContainerClient object
-// blobName: string, includes file extension if provided
-// fileContentsAsString: blob content
-export const uploadBlobFromString = async (containerClient,pageTitle, blobID, fileContentsAsString) => {
+  // works
+  
+  // containerClient: ContainerClient object
+  // blobName: string, includes file extension if provided
+  // fileContentsAsString: blob content
+  export const uploadBlobFromString = async (containerClient, blobID, fileContentsAsString) => {
     ```
     Uloads a string text as a blob into the container
     
     ```
       // Create a unique name for the blob
-    const blobName = pageTitle + blobID + '.txt';
+    const blobName = 'page' + blobID + '.txt';
   
     // Display blob name and url
     console.log(
@@ -67,3 +65,5 @@ export const uploadBlobFromString = async (containerClient,pageTitle, blobID, fi
     await blockBlobClient.upload(fileContentsAsString, fileContentsAsString.length);
   }
     
+  
+  
