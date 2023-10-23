@@ -1,7 +1,4 @@
-import {useState}   from '@forge/ui';
-import api, { route } from "@forge/api";
 
- 
 export  function createKeyword (ktitle,topic,def,pages)  {
 
   /*
